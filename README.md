@@ -1,0 +1,10 @@
+# minedisc #
+## description ##
+## languages ##
+code | usefor
+---- | ------
+java | source
+py   | source
+yml  | config
+xml  | config
+## environment ##

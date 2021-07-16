@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "ms-python.python",
+        "tht13.python",
+        "ms-python.vscode-pylance"
+    ],
+    "unwantedRecommendations": []
+}
+/* endfile */

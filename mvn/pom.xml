@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- required: <project, modelVersion, groupId, artifactId, version> -->
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <!-- currently supported project object model version -->
+  <modelVersion>4.0.0</modelVersion>
+  <!-- project -->
+  <groupId>nikochir</groupId>
+  <artifactId>minecord</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <name>minecord</name>
+  <url>http://github.com/nikochir/minecord</url>
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <!-- where to get artifacts -->
+  <repositories>
+    <!-- native -->
+    <repository>
+      <id>nikochir</id>
+      <url>https://github.com/nikochir/minecord</url>
+      <name>repomain</name>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- control -->
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/26894501/packages/maven</url>
+    </repository>
+    <!-- plugin -->
+    <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>papermc-repo</id>
+      <url>https://papermc.io/repo/repository/maven-public/</url>
+    </repository>
+    <!-- discord -->
+  </repositories>
+  <!-- what artifacts to use -->
+  <dependencies>
+    <!-- minecraft -->
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>bukkit</artifactId>
+      <version>1.15.2-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.16.4-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.destroystokyo.paper</groupId>
+      <artifactId>paper-api</artifactId>
+      <version>1.16.5-R0.1-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>provided</scope>
+      <optional>false</optional>
+    </dependency>
+    <!-- discord -->
+    <dependency>
+      <groupId>com.discordsrv</groupId>
+      <artifactId>discordsrv</artifactId>
+      <version>1.23.0</version>
+      <type>jar</type>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/../../server/local/plugins/discordsrv.jar</systemPath>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+    <!-- generated file support -->
+  <distributionManagement>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/26894501/packages/maven</url>
+    </repository>
+    <snapshotRepository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/26894501/packages/maven</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <!-- resulting target configuration -->
+  <build>
+    <!-- where to place and how to name the target -->
+    <!-- directory>${project.basedir}/../bin</directory -->
+    <directory>${project.basedir}/../../server/local/plugins</directory>
+    <finalName>${project.artifactId}</finalName>
+    <sourceDirectory>${project.basedir}/../src/main</sourceDirectory>
+    <outputDirectory>${project.basedir}/../bin/main</outputDirectory>
+    <testSourceDirectory>{project.basedir}/../src/test</testSourceDirectory>
+    <testOutputDirectory>${project.basedir}/../bin/test</testOutputDirectory>
+    <scriptSourceDirectory>${project.basedir}/../src/main</scriptSourceDirectory>
+		<!-- objects are to be places in the .jar root (not compile, but use) -->
+  	<resources>
+      <resource>
+	      <directory>${project.basedir}/../rsc/main</directory>
+      	<filtering>true</filtering>
+    	</resource>
+  	</resources>
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/../rcs/test</directory>
+      	<filtering>true</filtering>
+      </testResource>
+    </testResources>
+    <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
+      <plugins>
+        <!-- -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.4</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <!-- -->
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+<!-- endfile -->

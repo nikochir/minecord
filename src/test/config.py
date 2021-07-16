@@ -1,0 +1,13 @@
+#init#
+TOKEN_STRING = "ODYxNzE1MzY3MjQzNjc3Njk3.YON0-Q.sE7UpJTFs4o-hmCld7B-5gh5zm8"
+ROLE_ALL = {
+    "??": 734938469100683326,
+    "??": 734938585806929982,
+    "??": 734939226608500749,
+}
+ROLE_EXC = {
+}
+ROLE_NUM = 2
+#work#
+#quit#
+#endf#
