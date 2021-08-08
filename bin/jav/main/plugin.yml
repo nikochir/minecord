@@ -1,0 +1,21 @@
+#main#
+name: minecord
+main: main.minecord.Main
+version: 001
+api-version: 1.16
+#work#
+load: STARTUP
+loadbefore: []
+depend: [ MongoAPI ]
+softdepend: []
+database: false
+commands:
+permissions:
+#info#
+prefix: mcord
+author: nickodim_cheer
+authors: [ nickodim_cheer ]
+website: "https://github.com/nikochir/mineguis"
+description:
+  plugin for a minecraft-discord communication on a server;
+#endf#
